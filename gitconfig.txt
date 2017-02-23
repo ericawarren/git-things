@@ -16,11 +16,13 @@
 	recurseSubmodules = check
 [alias]
 	# USEFUL-EST
+	s = status
 	commit-all = !git add --all && git commit -m
 	add-new = !git ls-files -o --exclude-standard $(git rev-parse --show-toplevel) | xargs git add && git status
 	conflicts = git diff --name-only --diff-filter=U
 	new-branch = checkout -b
 	amend = commit --amend
+	merge-master = pull origin master
 	# DELETES ALL LOCAL BRANCHES THAT HAVE BEEN MERGED INTO CURRENT BRANCH
 	clean-merged = !git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d
 
@@ -28,8 +30,8 @@
 	push-all = push --recurse-submodules=on-demand
 
 	# SETUP STUFF
-	home-email = git config user.email "erwarren@gmail.com"
-	work-email = git config user.email "erica.warren@macmillan.com"
+	home-email = config user.email "erwarren@gmail.com"
+	work-email = config user.email "erica.warren@macmillan.com"
 
 	# INFORMATIONAL
 	branches = branch -a
