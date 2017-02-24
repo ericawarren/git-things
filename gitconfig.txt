@@ -21,13 +21,18 @@
 	add-new = !git ls-files -o --exclude-standard $(git rev-parse --show-toplevel) | xargs git add && git status
 	conflicts = git diff --name-only --diff-filter=U
 	new-branch = checkout -b
-	amend = commit --amend
+	# amends staged changes to last commit with same msg
+	amend = commit --amend -C HEAD
 	merge-master = pull origin master
+	mergetest = "!f(){ git merge --no-commit --no-ff \"$1\"; git merge --abort; echo \"Merge aborted\"; };f "
 	# DELETES ALL LOCAL BRANCHES THAT HAVE BEEN MERGED INTO CURRENT BRANCH
-	clean-merged = !git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d
+	clean-branch = !git branch --merged | grep -v \"\\*\" | xargs -n 1 git branch -d
+	# show inline diff
+	wdiff = diff --word-diff
 
 	# SUBMODULE STUFF
 	push-all = push --recurse-submodules=on-demand
+	clone-subs = clone --recursive
 
 	# SETUP STUFF
 	home-email = config user.email "erwarren@gmail.com"
